@@ -18,6 +18,9 @@ jobs:
       DJANGO_PROJECT_PATH: ${GITHUB_WORKSPACE}/kid-coder-carnival-api/kidcodercarnivalapi
 
     steps:
+    - name: Print Directory Contents
+      run: |
+        ls -R $GITHUB_WORKSPACE
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
