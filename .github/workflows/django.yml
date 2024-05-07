@@ -21,7 +21,8 @@ jobs:
     - name: Print Directory Contents
       run: |
         ls -R $GITHUB_WORKSPACE/kid-coder-carnival-api
-    - uses: actions/checkout@v4
+    - name: Checkout Repository
+      uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
