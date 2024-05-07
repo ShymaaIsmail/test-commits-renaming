@@ -20,7 +20,7 @@ jobs:
     steps:
     - name: Print Directory Contents
       run: |
-        ls -R $GITHUB_WORKSPACE
+        ls -R $GITHUB_WORKSPACE/kid-coder-carnival-api
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
@@ -29,7 +29,7 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r ${DJANGO_PROJECT_PATH}/requirements.txt
+        pip install -r ${GITHUB_WORKSPACE}/kid-coder-carnival-api/kidcodercarnivalapi/requirements.txt
     - name: Run Tests
       run: |
         python manage.py test
