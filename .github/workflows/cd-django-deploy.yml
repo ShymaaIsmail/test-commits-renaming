@@ -10,12 +10,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Download Artifact from CI
+      # Download artifacts from CI workflow
+      - name: Download CI Artifacts
         uses: actions/download-artifact@v2
         with:
           name: packaged-project
-          workflow: "Django CI" 
-          path: ${{ github.workspace }}
+          workflow: ci-django-build.yml
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configure SSH and Deploy
         uses: appleboy/ssh-action@master
@@ -24,4 +25,4 @@ jobs:
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            scp -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ github.workspace }}/kid_coder_carnival_api_1.tar.gz ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
+            scp -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ github.workspace }}/packaged-project ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
