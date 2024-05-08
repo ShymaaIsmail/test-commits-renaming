@@ -15,7 +15,7 @@ jobs:
         python-version: [3.7, 3.8, 3.9]
 
     env:
-      DJANGO_PROJECT_PATH: $GITHUB_WORKSPACE/kid-coder-carnival-api/kidcodercarnivalapi/
+      DJANGO_PROJECT_PATH: $GITHUB_WORKSPACE/kid-coder-carnival-api/kidcodercarnivalapi
       DJANGO_BUILD_NAME: $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz
 
     steps:
@@ -49,7 +49,7 @@ jobs:
   
     - name: Package project
       run: |
-        tar -czvf $DJANGO_BUILD_NAME ${GITHUB_WORKSPACE}/kid-coder-carnival-api/kidcodercarnivalapi/
+        tar -czvf $DJANGO_BUILD_NAME ${GITHUB_WORKSPACE}/kid-coder-carnival-api/kidcodercarnivalapi
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
