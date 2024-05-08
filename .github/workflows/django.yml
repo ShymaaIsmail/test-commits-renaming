@@ -40,13 +40,9 @@ jobs:
         cd $GITHUB_WORKSPACE/kid-coder-carnival-api
         # Create the tarball file
         tar -czvf $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz kidcodercarnivalapi
-        ls  $GITHUB_WORKSPACE
   
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: packaged-project
-        run: |
-          pwd
-          ls
-        path: $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz
+        path: "$GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz"
