@@ -49,7 +49,11 @@ jobs:
   
     - name: Package project
       run: |
-        tar -czvf $DJANGO_BUILD_NAME ${GITHUB_WORKSPACE}/kid-coder-carnival-api/kidcodercarnivalapi
+        # Navigate to the directory containing the project files
+        cd $GITHUB_WORKSPACE/kid-coder-carnival-api
+        # Create the tarball file
+        tar -czvf $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz kidcodercarnivalapi
+
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
