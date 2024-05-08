@@ -15,9 +15,9 @@ jobs:
         python-version: [3.7, 3.8, 3.9]
 
     env:
-      timestamp: $(date +%Y%m%d_%H%M%S)
+      TIME_STAMP: $(date +%Y%m%d_%H%M%S)
       DJANGO_PROJECT_PATH: ${GITHUB_WORKSPACE}/kid-coder-carnival-api/kidcodercarnivalapi
-      DJANGO_BUILD_NAME: $GITHUB_WORKSPACE/kid_coder_carnival_api_$timestamp.tar.gz
+      DJANGO_BUILD_NAME: ${GITHUB_WORKSPACE}/kid_coder_carnival_api_${TIME_STAMP}.tar.gz
 
     steps:
     - name: Checkout Repository
