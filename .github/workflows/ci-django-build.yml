@@ -42,7 +42,7 @@ jobs:
         tar -czvf $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz kidcodercarnivalapi
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: packaged-project
         path: "/home/runner/work/kid-coder-carnival/kid-coder-carnival/kid_coder_carnival_api_1.tar.gz"
