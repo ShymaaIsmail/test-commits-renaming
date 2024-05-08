@@ -10,8 +10,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - name: Download Artifact from CI
+        uses: actions/download-artifact@v2
+        with:
+          name: packaged-project
+          path: ${{ github.workspace }}
+
       - name: Configure SSH and Deploy
         uses: appleboy/ssh-action@master
         with:
@@ -19,6 +23,4 @@ jobs:
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            pwd
-            ls
-            scp -i ${{ secrets.SSH_PRIVATE_KEY }} $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
+            scp -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ github.workspace }}/kid_coder_carnival_api_1.tar.gz ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
