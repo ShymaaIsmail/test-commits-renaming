@@ -41,12 +41,8 @@ jobs:
         # Create the tarball file
         tar -czvf $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz kidcodercarnivalapi
 
-    - name: Verify Tar File
-      run: |
-        ls -l $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz
-
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: packaged-project
-        path: "$GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz"
+        path: "/home/runner/work/kid-coder-carnival/kid-coder-carnival/kid_coder_carnival_api_1.tar.gz"
