@@ -15,8 +15,8 @@ jobs:
         python-version: [3.7, 3.8, 3.9]
 
     env:
-      DJANGO_PROJECT_PATH: ${GITHUB_WORKSPACE}/kid-coder-carnival-api/kidcodercarnivalapi
-      DJANGO_BUILD_NAME: ${GITHUB_WORKSPACE}/kid_coder_carnival_api_1.tar.gz
+      DJANGO_PROJECT_PATH: $GITHUB_WORKSPACE/kid-coder-carnival-api/kidcodercarnivalapi
+      DJANGO_BUILD_NAME: $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz
 
     steps:
     - name: Checkout Repository
