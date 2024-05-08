@@ -19,4 +19,5 @@ jobs:
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
+            ls -l $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz
             scp -i ${{ secrets.SSH_PRIVATE_KEY }} $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
