@@ -44,6 +44,8 @@ jobs:
 
     - name: Debug - Print Variables
       run: |
+        echo "TIME_STAMP: $TIME_STAMP"
+        echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
         echo "DJANGO_PROJECT_PATH: $DJANGO_PROJECT_PATH"
         echo "DJANGO_BUILD_NAME: $DJANGO_BUILD_NAME"
     - name: Package project
