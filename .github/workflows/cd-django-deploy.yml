@@ -14,6 +14,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: packaged-project
+          workflow: "Django CI" 
           path: ${{ github.workspace }}
 
       - name: Configure SSH and Deploy
