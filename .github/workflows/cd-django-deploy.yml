@@ -14,7 +14,7 @@ jobs:
       - name: Download CI Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: packaged-project
+          name: kid-coder-api-package
 
       - name: Configure SSH and Deploy
         uses: appleboy/ssh-action@master
