@@ -40,10 +40,9 @@ jobs:
         cd $GITHUB_WORKSPACE/kid-coder-carnival-api
         # Create the tarball file
         tar -czvf $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz kidcodercarnivalapi
-        test -f "$GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz" && echo "Tar file exists" || echo "Tar file does not exist"
-
+  
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: packaged-project
-        path: $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz
+        path: $GITHUB_WORKSPACE/kid-coder-carnival-api/kid_coder_carnival_api_1.tar.gz
