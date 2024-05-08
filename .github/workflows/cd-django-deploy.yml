@@ -15,8 +15,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: packaged-project
-          workflow: ci-django-build.yml
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configure SSH and Deploy
         uses: appleboy/ssh-action@master
