@@ -10,11 +10,19 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # Get the run ID from the previous workflow
+      - name: Get run ID
+        id: get_run_id
+        uses: actions/github-script@v4
+        with:
+          script: echo ${{ needs.upload.outputs.run_id }}
+
       # Download artifacts from CI workflow
       - name: Download CI Artifacts
         uses: actions/download-artifact@v4
         with:
           name: kid-coder-api-package
+          run-id: ${{ steps.get_run_id.outputs.run_id }}
 
       - name: Configure SSH and Deploy
         uses: appleboy/ssh-action@master
