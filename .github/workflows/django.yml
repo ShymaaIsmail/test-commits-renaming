@@ -42,7 +42,8 @@ jobs:
         tar -czvf $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz kidcodercarnivalapi
 
     - name: Verify Tar File
-      run: ls -l $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz
+      run: |
+        ls -l $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
