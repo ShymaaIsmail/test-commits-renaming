@@ -15,7 +15,7 @@ jobs:
         python-version: [3.7, 3.8, 3.9]
 
     env:
-      DJANGO_PROJECT_PATH: $GITHUB_WORKSPACE/kid-coder-carnival-api/kidcodercarnivalapi
+      DJANGO_PROJECT_PATH: $GITHUB_WORKSPACE/kid-coder-carnival-api/kidcodercarnivalapi/
       DJANGO_BUILD_NAME: $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz
 
     steps:
@@ -46,11 +46,7 @@ jobs:
         echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
         echo "DJANGO_PROJECT_PATH: $DJANGO_PROJECT_PATH"
         echo "DJANGO_BUILD_NAME: $DJANGO_BUILD_NAME"
-    
-    - name: Set timestamp
-      id: set_timestamp
-      run: echo "timestamp=$(date +%Y%m%d_%H%M%S)" >> $GITHUB_ENV
-
+  
     - name: Package project
       run: |
         tar -czvf $DJANGO_BUILD_NAME $DJANGO_PROJECT_PATH
