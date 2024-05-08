@@ -15,7 +15,9 @@ jobs:
         python-version: [3.7, 3.8, 3.9]
 
     env:
+      timestamp: $(date +%Y%m%d_%H%M%S)
       DJANGO_PROJECT_PATH: ${GITHUB_WORKSPACE}/kid-coder-carnival-api/kidcodercarnivalapi
+      DJANGO_BUILD_NAME: $GITHUB_WORKSPACE/kid_coder_carnival_api_$timestamp.tar.gz
 
     steps:
     - name: Checkout Repository
@@ -36,9 +38,10 @@ jobs:
         # Example: Exclude development settings file
         rm -f $DJANGO_PROJECT_PATH/development_settings.py
     - name: Package project
-      run: tar -czvf ${GITHUB_WORKSPACE}/your_project.tar.gz $DJANGO_PROJECT_PATH
+      run: |
+        tar -czvf $DJANGO_BUILD_NAME $DJANGO_PROJECT_PATH
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: packaged-project
-        path: $GITHUB_WORKSPACE/your_project.tar.gz
+        path: $DJANGO_BUILD_NAME
