@@ -25,9 +25,6 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Print Directory Contents
-      run: |
-        ls -R $GITHUB_WORKSPACE/kid-coder-carnival-api
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
@@ -36,26 +33,17 @@ jobs:
       run: |
         # Example: Exclude development settings file
         rm -f $DJANGO_PROJECT_PATH/development_settings.py
-    - name: Debug - Print Workspace Contents
-      run: |
-        echo "Workspace contents:"
-        ls -R ${GITHUB_WORKSPACE}
 
-    - name: Debug - Print Variables
-      run: |
-        echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-        echo "DJANGO_PROJECT_PATH: $DJANGO_PROJECT_PATH"
-        echo "DJANGO_BUILD_NAME: $DJANGO_BUILD_NAME"
-  
     - name: Package project
       run: |
         # Navigate to the directory containing the project files
         cd $GITHUB_WORKSPACE/kid-coder-carnival-api
         # Create the tarball file
-        tar -czvf ${{ env.DJANGO_BUILD_NAME}} kidcodercarnivalapi
+        tar -czvf $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz kidcodercarnivalapi
+        test -f "$GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz" && echo "Tar file exists" || echo "Tar file does not exist"
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: packaged-project
-        path: ${{ env.DJANGO_BUILD_NAME}}
+        path: $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz
