@@ -61,16 +61,13 @@ jobs:
     steps:
       # Download artifacts from CI workflow
       - name: Download CI Artifacts
+        id: download_artifact
         uses: actions/download-artifact@v4
         with:
           name: ${{env.ci_artifact_name}}
           run-id: ${{ env.ci_run_id }}
 
-      - name: Configure SSH and Deploy
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            ssh -i "${{ secrets.SSH_PRIVATE_KEY }}" ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }} "echo SSH connection successful"
+      - name: Copy artifact to remote server
+        run: |
+          downloaded_file_path = ${{ steps.download_artifact.outputs.download_path }}
+          scp o StrictHostKeyChecking=no -i "${{ secrets.SSH_PRIVATE_KEY }}" ${{ downloaded_file_path }} ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
