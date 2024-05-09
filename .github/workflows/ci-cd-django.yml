@@ -73,5 +73,5 @@ jobs:
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            scp -i "${{ secrets.SSH_PRIVATE_KEY }}" /home/runner/work/kid-coder-carnival/kid-coder-carnival/kid_coder_carnival_api_1.tar.gz ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
+            scp o StrictHostKeyChecking=no -i "${{ secrets.SSH_PRIVATE_KEY }}" /home/runner/work/kid-coder-carnival/kid-coder-carnival/kid_coder_carnival_api_1.tar.gz ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
 
