@@ -51,5 +51,6 @@ jobs:
       # Set the output variable with the run ID
     - name: Set run ID output
       id: set_run_id
-      run: echo "::set-output name=run_id::${{ github.run_id }}"
+      run: echo "{ci_run_id}={${{ github.run_id }}}" >> $GITHUB_OUTPUT
+
 
