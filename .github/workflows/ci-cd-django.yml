@@ -72,13 +72,15 @@ jobs:
           ls -R -la
           ls -l ./kid-coder-api-package-${{ github.sha }}/kid_coder_carnival_api_1.tar.gz
   
+      - name: Configure SSH and Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script:
+          ls -la /home/ubuntu/
+  
       - name: Copy artifact to remote server
         run: |
-          scp -o StrictHostKeyChecking=no -i "$SSH_PRIVATE_KEY" \
-          "./kid-coder-api-package-${GITHUB_SHA}/kid_coder_carnival_api_1.tar.gz" \
-          "${DEPLOY_USERNAME}@${DEPLOY_HOST}:/tmp"
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          DEPLOY_USERNAME: ${{ secrets.DEPLOY_USERNAME }}
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          GITHUB_SHA: ${{ github.sha }}
+          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }}  ./kid-coder-api-package-${{ github.sha }}/kid_coder_carnival_api_1.tar.gz ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
