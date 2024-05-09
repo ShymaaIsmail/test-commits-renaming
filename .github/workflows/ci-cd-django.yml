@@ -1,4 +1,4 @@
-name: Django CI
+name: Django CI CD
 
 on:
   push:
@@ -70,7 +70,7 @@ jobs:
       - name: Show downloaded files
         run: |
           ls -R -la
-          ls -l ./kid_coder*/kid_coder_carnival_api_1.tar.gz
+          ls -l ./kid-coder-api-package-${{ github.sha }}/kid_coder_carnival_api_1.tar.gz
   
       - name: Copy artifact to remote server
         run: |
