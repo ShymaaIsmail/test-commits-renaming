@@ -51,6 +51,8 @@ jobs:
       # Set the output variable with the run ID
     - name: Set run ID output
       id: set_run_id
-      run: echo "{ci_run_id}={${{ github.run_id }}}" >> $GITHUB_OUTPUT
+      run: |
+        echo "ci_run_id=${{ github.run_id }}" >> $GITHUB_ENV
+        echo "ci_artifact_name=kid-coder-api-package-${{ github.sha }}" >> $GITHUB_ENV
 
 

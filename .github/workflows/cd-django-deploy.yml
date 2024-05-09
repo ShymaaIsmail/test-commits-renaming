@@ -10,17 +10,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Get ci_run_id from output
-        run: |
-          ci_run_id=$(grep -oP 'ci_run_id=\K.*' "$GITHUB_OUTPUT")
-          echo "ci_run_id=$ci_run_id"
-
       # Download artifacts from CI workflow
       - name: Download CI Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: kid-coder-api-package
-          run-id: ${{ ci_run_id }}
+          name: ${{env.ci_artifact_name}}
+          run-id: ${{ env.ci_run_id }}
 
       - name: Configure SSH and Deploy
         uses: appleboy/ssh-action@master
