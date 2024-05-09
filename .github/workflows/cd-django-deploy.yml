@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Download artifacts from CI workflow
+      - name: Debug vars
+        run: |
+          echo ${{env.ci_artifact_name}}
+          echo ${{ env.ci_run_id }}
+
       - name: Download CI Artifacts
         uses: actions/download-artifact@v4
         with:
