@@ -78,8 +78,8 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-        script:
-          ls -la /home/ubuntu/
+          script: |
+            ls -la /home/ubuntu/
   
       - name: Copy artifact to remote server
         run: |
