@@ -73,4 +73,4 @@ jobs:
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            scp -i "${{ secrets.SSH_PRIVATE_KEY }}" ff.ff ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
+            ssh -i "${{ secrets.SSH_PRIVATE_KEY }}" ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }} "echo SSH connection successful"
