@@ -85,9 +85,9 @@ jobs:
       - name: Publish
         uses: nogsantos/scp-deploy@master
         with:
-          src: ./kid-coder-api-package-${{ github.sha }}/kid_coder_carnival_api_1.tar.gz
+          src: ./kid-coder-api-package-${{ github.sha }}/*
           host: ${{ secrets.DEPLOY_HOST }}
-          remote: /home/ubuntu/kid_coder_carnival/api.tar.gz
+          remote: /home/ubuntu/kid_coder_carnival/
           port: 22
           user: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
