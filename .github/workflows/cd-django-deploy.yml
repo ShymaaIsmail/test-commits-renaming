@@ -10,12 +10,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # Get the run ID from the previous workflow
-      - name: Get run ID
-        id: get_run_id
-        uses: actions/github-script@v4
-        with:
-          script: echo ${{ needs.upload.outputs.run_id }}
+    - name: Get ci_run_id from output
+      run: |
+        ci_run_id=$(grep -oP 'ci_run_id=\K.*' "$GITHUB_OUTPUT")
+        echo "ci_run_id=$ci_run_id"
 
       # Download artifacts from CI workflow
       - name: Download CI Artifacts
