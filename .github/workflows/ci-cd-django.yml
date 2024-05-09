@@ -90,4 +90,14 @@ jobs:
           username: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            ls -la /home/ubuntu/
+            cd /home/ubuntu/kids_coder_carnival
+            tar -xzvf kid_coder_carnival_api_1.tar.gz
+            cd kidcodercarnivalapi/
+            python3 manage.py makemigrations kidcodercarnivalapi
+            python3  manage.py migrate
+            python3 manage.py loaddata admin_user_fixture.json
+            python3 manage.py loaddata challenges_fixture.json
+            python3 manage.py runserver
+
+
+
