@@ -69,8 +69,8 @@ jobs:
 
       - name: Show downloaded files
         run: |
-        ls -R -la
-        ls -l ./${{ env.ci_artifact_name }}/kid_coder_carnival_api_1.tar.gz
+          ls -R -la
+          ls -l ./${{ env.ci_artifact_name }}/kid_coder_carnival_api_1.tar.gz
   
       - name: Copy artifact to remote server
         run: |
