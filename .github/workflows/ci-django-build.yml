@@ -41,13 +41,10 @@ jobs:
         # Create the tarball file
         tar -czvf $GITHUB_WORKSPACE/kid_coder_carnival_api_1.tar.gz kidcodercarnivalapi
 
-    - name: Set artifact name
-      run: echo "::set-env name=ARTIFACT_NAME::kid-coder-api-package-$(date +%Y%m%d%H%M%S)"
-
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ env.ARTIFACT_NAME }}
+        name: kid-coder-api-package-${{ github.sha }}
         path: "/home/runner/work/kid-coder-carnival/kid-coder-carnival/kid_coder_carnival_api_1.tar.gz"
         overwrite: true
 
