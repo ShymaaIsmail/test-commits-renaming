@@ -69,4 +69,8 @@ jobs:
 
       - name: Copy artifact to remote server
         run: |
-          scp -o StrictHostKeyChecking=no -i "${{ secrets.SSH_PRIVATE_KEY }}" -vvv ${{ steps.download_artifact.outputs.download_path }} ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
+          echo ${{ secrets.SSH_PRIVATE_KEY }}
+          echo  ${{ steps.download_artifact.outputs.download_path }}
+          echo ${{ secrets.DEPLOY_HOST }}
+          echo ${{ secrets.DEPLOY_USERNAME}}
+          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }}  ${{ steps.download_artifact.outputs.download_path }} ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
