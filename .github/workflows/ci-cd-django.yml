@@ -87,7 +87,7 @@ jobs:
         with:
           src: ./kid-coder-api-package-${{ github.sha }}/kid_coder_carnival_api_1.tar.gz
           host: ${{ secrets.DEPLOY_HOST }}
-          remote: /home/ubuntu/kid-coder-carnival
+          remote: /home/ubuntu/kid_coder_carnival/api.tar.gz
           port: 22
           user: ${{ secrets.DEPLOY_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
