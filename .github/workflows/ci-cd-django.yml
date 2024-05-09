@@ -68,8 +68,10 @@ jobs:
           run-id: ${{ env.ci_run_id }}
 
       - name: Show downloaded files
-        run: ls -R -la
+        run: |
+        ls -R -la
+        ls -l ./${{ env.ci_artifact_name }}/kid_coder_carnival_api_1.tar.gz
   
       - name: Copy artifact to remote server
         run: |
-          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }}  ./${{env.ci_artifact_name}} ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
+          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }}  ./${{ env.ci_artifact_name }}/kid_coder_carnival_api_1.tar.gz ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
