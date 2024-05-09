@@ -93,6 +93,7 @@ jobs:
             cd /home/ubuntu/kids_coder_carnival
             tar -xzvf kid_coder_carnival_api_1.tar.gz
             cd kidcodercarnivalapi/
+            pip install -r requirements.txt
             python3 manage.py makemigrations kidcodercarnivalapi
             python3  manage.py migrate
             python3 manage.py loaddata admin_user_fixture.json
