@@ -160,6 +160,24 @@ SWAGGER_SETTINGS = {
         },
     },
 }
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/django/kids-coder-api.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
 
 CSRF_COOKIE_SECURE = False
 JWT_EXPIRATION_DELTA = datetime.timedelta(seconds=3600)
