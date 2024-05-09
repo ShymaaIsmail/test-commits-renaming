@@ -98,6 +98,7 @@ jobs:
             python3  manage.py migrate
             python3 manage.py loaddata admin_user_fixture.json
             python3 manage.py loaddata challenges_fixture.json
+            sudo lsof -t -i :8000 | xargs kill -9
             python3 manage.py runserver
 
 
