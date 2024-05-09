@@ -55,4 +55,22 @@ jobs:
         echo "ci_run_id=${{ github.run_id }}" >> $GITHUB_ENV
         echo "ci_artifact_name=kid-coder-api-package-${{ github.sha }}" >> $GITHUB_ENV
 
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Download artifacts from CI workflow
+      - name: Download CI Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{env.ci_artifact_name}}
+          run-id: ${{ env.ci_run_id }}
+
+      - name: Configure SSH and Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            scp -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ github.workspace }}/packaged-project ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
 
