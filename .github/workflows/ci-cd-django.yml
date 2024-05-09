@@ -67,6 +67,9 @@ jobs:
           name: ${{env.ci_artifact_name}}
           run-id: ${{ env.ci_run_id }}
 
+      - name: Show downloaded files
+        run: ls -la
+  
       - name: Copy artifact to remote server
         run: |
           echo ${{ secrets.SSH_PRIVATE_KEY }}
