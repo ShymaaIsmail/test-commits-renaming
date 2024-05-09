@@ -7,26 +7,53 @@ on:
       - completed
 
 jobs:
-  deploy:
+  download_context_artifact:
     runs-on: ubuntu-latest
     steps:
-      # Download artifacts from CI workflow
-      - name: Debug vars
-        run: |
-          echo ${{env.ci_artifact_name}}
-          echo ${{ env.ci_run_id }}
-
-      - name: Download CI Artifacts
-        uses: actions/download-artifact@v4
+      - name: 'Download artifact'
+        uses: actions/github-script@v6
         with:
-          name: ${{env.ci_artifact_name}}
-          run-id: ${{ env.ci_run_id }}
-
-      - name: Configure SSH and Deploy
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            scp -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ github.workspace }}/packaged-project ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
+            let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.payload.workflow_run.id,
+            });
+            let matchArtifact = allArtifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "context.json"
+            })[0];
+            let download = await github.rest.actions.downloadArtifact({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              artifact_id: matchArtifact.id,
+              archive_format: 'zip',
+            });
+            let fs = require('fs');
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/context.zip`, Buffer.from(download.data));
+    outputs:
+      property_one: ${{fromJSON(steps.return-parsed-json.outputs.result).prop_1}}
+      property_two: ${{fromJSON(steps.return-parsed-json.outputs.result).prop_2}}
+
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # Download artifacts from CI workflow
+  #     - name: Debug vars
+  #       run: |
+  #         echo ${{env.ci_artifact_name}}
+  #         echo ${{ env.ci_run_id }}
+
+  #     - name: Download CI Artifacts
+  #       uses: actions/download-artifact@v4
+  #       with:
+  #         name: ${{env.ci_artifact_name}}
+  #         run-id: ${{ env.ci_run_id }}
+
+  #     - name: Configure SSH and Deploy
+  #       uses: appleboy/ssh-action@master
+  #       with:
+  #         host: ${{ secrets.DEPLOY_HOST }}
+  #         username: ${{ secrets.DEPLOY_USERNAME }}
+  #         key: ${{ secrets.SSH_PRIVATE_KEY }}
+  #         script: |
+  #           scp -i ${{ secrets.SSH_PRIVATE_KEY }} ${{ github.workspace }}/packaged-project ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
