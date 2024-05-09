@@ -84,4 +84,4 @@ jobs:
   
       - name: Copy artifact to remote server
         run: |
-          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }}  ${{ github.workspace }}/kid-coder-api-package-${{ github.sha }}/kid_coder_carnival_api_1.tar.gz ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
+          scp -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }}  /home/runner/work/kid-coder-carnival/kid-coder-carnival/kid-coder-api-package-${{ github.sha }}/kid_coder_carnival_api_1.tar.gz ${{ secrets.DEPLOY_USERNAME }}@${{ secrets.DEPLOY_HOST }}:/home/ubuntu/kids-coder-carnival
