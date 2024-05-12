@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
     'drf_yasg',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'kidcodercarnivalapi.urls'
@@ -165,3 +167,7 @@ SWAGGER_SETTINGS = {
 
 CSRF_COOKIE_SECURE = False
 JWT_EXPIRATION_DELTA = datetime.timedelta(seconds=3600)
+CORS_ORIGIN_WHITELIST = [
+    'https://shymaaismail.tech',
+    # Add other origins as needed
+]
